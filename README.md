@@ -1,4 +1,6 @@
+Setup
 
+```shell
 vim ~/.gitconfig # Add your config
 vim ~/.ssh/id_rsa # Add private key
 chmod 600 ~/.ssh/id_rsa
@@ -8,7 +10,9 @@ ssh-add
 eval `ssh-agent`
  ssh-add
 sudo yum install -y jq
+```
 
+export AWS_REGION=$(curl -s 169.254.169.254/latest/dynamic/instance-identity/document | jq -r '.region')
 export AWS_DEFAULT_REGION=$AWS_REGION
 EKS_CLUSTER_NAME=mlops-c9
 GITHUB_DIR=$PWD/src/github.com
