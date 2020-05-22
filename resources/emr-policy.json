@@ -22,7 +22,7 @@
             "Sid": "VisualEditor1",
             "Effect": "Allow",
             "Action": "elasticmapreduce:*",
-            "Resource": "arn:aws:elasticmapreduce:*:*:cluster/*"
+            "Resource": "*"
         },
         {
             "Sid": "PolicyStatementToAllowUserToPassOneSpecificRole",
