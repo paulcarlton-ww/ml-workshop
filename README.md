@@ -1,4 +1,4 @@
-Setup
+# Setup
 
 ```shell
 vim ~/.gitconfig # Add your config
