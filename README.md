@@ -12,6 +12,16 @@ eval `ssh-agent`
 sudo yum install -y jq
 ```
 
+# Extend FileSystem size
+
+The default disk size for a cloud9 instance is 10gb but we need more than this for the tools needed to build ML projects.
+So we need to increase the size of the EBS volume and grow the Linux filesytem. To do this use theaws 
+
+```shell
+sudo growpart /dev/xvda 1
+sudo resize2fs /dev/xvda1
+```
+
 # Create EKS Cluster
 
 ```shell
@@ -90,10 +100,15 @@ sed -i s/roles:/enablePodIamPolicy\:\ true/ kfctl.yam
 
 export CONFIG_FILE=${KF_DIR}/kfctl.yaml
 kfctl apply -V -f ${CONFIG_FILE}
+```
 
+# Access the Kubeflow UI
+
+Use terminal on your workstation (not cloud9 session)
 ```shell
-Access the Kubeflow UI
-
+export AWS_DEFAULT_REGION=eu-west-2 # the region from cloud9 environment
+EKS_CLUSTER_NAME=mlops-c9 # name of your cluster
+aws eks update-kubeconfig --name $EKS_CLUSTER_NAME
 kubectl port-forward svc/istio-ingressgateway -n istio-system 8080:80 &
 ```
 
